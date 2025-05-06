@@ -1,0 +1,28 @@
+For this lab we will be using active deauthentication to kick a host off a network and get them to re-authenticate.
+
+It will be much the same as passive sniffing, but we will run one extra command.
+First make sure that you can find the "Active-Practice" SSID with airodump.
+
+There should be one host connected to it.
+
+Note the BSSID for both the AP and the connected client.
+
+AP BSSID:
+Client BSSID:
+
+Now that you have them, in a seperate window you will need to run the following command:
+
+aireplay-ng -0 1 -a <AP MAC> -c <CLIENT MAC> <YOUR ADAPTER INTERFACE>
+
+-0 - means that we are sending de-auth packets
+	 the "1" trailing "-0" is the number of deauth packets to send.
+-a - Denotes the AP we are targeting
+-c - Denotes the client we are targeting
+And of course you need to tell it what interface to use.
+
+You should see the host kicked off, and it should be set up to re-authenticate.
+Watch for the hash capture!
+
+If it doesn't work, try again. Make sure you are tareting the correct channel!
+
+Once you have recovered the hash, use the same steps as in the previous lab to crack the new Hash.

@@ -1,0 +1,62 @@
+Now that your NIC is in promiscuous mode, lets see what WiFi signals are out there!
+
+lets start by just running everything as sudo.
+Enter `sudo su`
+? What does this command do?
+
+airmon-ng start wlan0
+
+NOTE: You'll see a 524 error, ignore it for now. As long as there is output in airodump it doesn't matter
+
+To listed for any and all signals you can, run the following:
+`airodump-ng`
+
+? What does the output look like, what are we seeing?
+
+Lets identify our target, here it should be named `Practice-WiFi`
+
+? What is the ESSID? <Enter here> Practice-Wifi
+? What is its MAC? <Enter here>   3C:8C:F8:EC:7E:27?
+What Channel is it using? <Enter Here> 1
+? What encryption method does it use? <Enter Here> WPA2 (CCMP)
+? Does it use PSK? <Y/N>? Y
+
+
+So we see a lot of output here, but we want to narrow down our focus and only look at the one we care about.
+We can do that by filtering!
+Use the following command:
+`airodump-ng <interface_name> --essid-regex="<First word of the SSID>*"`
+
+? What does the '*' mean in the above command?
+
+
+If this was run successfully you should now only see 1 ESSID in your output, a much cleaner interface to work with!
+
+
+Now, when we perform security assessments, we only want to work on our target.
+As targeting general AP's that we do not have EXPLICIT permission to work on is highly illegal and could land you jail time.
+So make sure all the information you captured above is accurate!
+
+
+Now we need to capture a 4-way handshake.
+? What is the 4-way handshake?
+? What will it give us that we can use?
+
+
+NOTE: (It is highly recommended to use the `~/hacking/` folder for this next part. You may need to make said folder if it doesnt already exist)
+To do so, lets use the following command:
+`airodump-ng <interface_name> -c <channel the AP is broadcasting on> --bssid <MAC Address> -w psk`
+
+the -w here will write all the pertinent files (to the current directory) at psk*
+
+Now you should see a bunch of `psk-*` files in the current directory once you quit litening.
+
+? What needs to happen in order to capture a 4-way handshake?
+
+NOTE: you will need to be listening with the above command to capture the handshake!
+
+If you see something like the following in first line of airodump-ng:
+[ WPA handshake: <MAC Address Here>
+
+Congrats!!! You have captured your first authentication key!!
+Now lets get to cracking that Hash!

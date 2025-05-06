@@ -1,0 +1,54 @@
+Be sure to sudo su!
+
+Now you should have captured your first key, it will be in the psk*.cap file.
+Take a look at the file now!
+? What do you see?
+
+We need to use a wordlist when cracking hashes, luckily for you we have already provided one!
+All you need to do for this part is run the following:
+aircrack-ng -w /home/user/Desktop/rockyou.txt -b <AP MAC Address Here> psk*.cap
+
+? What is the `rockyou.txt` password list? (You will need to look this up)
+? Why do we use psk*.cap and not the name of a specific .cap file?
+
+If everything went well, you should see something like the following:
+```
+      [00:00:00] 1/1 keys tested (21.79 k/s)
+
+      Time left: --
+
+                          KEY FOUND! [ ???????? ]
+
+
+      Master Key     : 00 91 BD CD 5C 9B C8 39 25 DB E8 83 78 93 6D 34 
+                       14 F7 32 5E 60 87 7A BE 13 2D AA 2A 76 F2 33 69 
+
+      Transient Key  : 7D 08 2B F9 1F 43 5A 70 25 2E 27 26 23 C5 49 0F 
+                       1F A2 13 7B D2 39 3C F0 56 2D B6 4A 6F 49 31 02 
+                       6B 4D 8C AE 74 11 89 1F FB A0 9C C8 0D AA E3 C2 
+                       9A 79 72 D4 EA 67 03 E7 79 16 AE 96 D5 CD F9 B8 
+
+      EAPOL HMAC     : 30 CD 20 A6 97 DB 6B 36 66 19 5D 3D E2 53 0C B9 
+```
+
+Congrats! You can now log in to the wifi.
+
+? What was the password? <Enter Password Here>
+
+Before you can do that though, you will need to quit monitoring.
+Use the following commands:
+
+```
+airmon-ng stop <interface_name>
+systemctl start NetworkManager
+dhclient -r
+dhclient
+```
+
+? Do you have an IP Address?
+? What is it? <Enter IP Here>
+
+
+
+Use the identified key to log in with the 
+? Navigate to 192.168.10.1 to prove it to the instructor!
